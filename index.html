@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>BlueStacks Matryoshka RP | Кастомный эмулятор</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0c0f1c 0%, #05070f 100%);
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ОСНОВНАЯ КАРТОЧКА */
+        .bluestacks-card {
+            background: rgba(10, 13, 24, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
+            border: 1px solid rgba(255, 75, 95, 0.4);
+            box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 75, 95, 0.2), 0 0 30px rgba(255, 40, 70, 0.2);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        /* Хедер */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 32px;
+            background: rgba(0, 0, 0, 0.55);
+            border-bottom: 2px solid #ff4d6d;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* SVG ЛОГОТИП */
+        .logo-svg {
+            width: 52px;
+            height: 52px;
+            filter: drop-shadow(0 0 8px #ff4d6d);
+            transition: transform 0.2s;
+        }
+        .logo-svg:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b8a, #ff2d55);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            background: linear-gradient(135deg, #5d9eff, #2d7aff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .badge {
+            background: rgba(255, 77, 109, 0.2);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #ff6b8a;
+            border: 1px solid rgba(255, 77, 109, 0.4);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #aaa;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .tab-btn.active {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 0 12px rgba(255, 77, 109, 0.5);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 77, 109, 0.2);
+            color: #ff8aa3;
+        }
+
+        /* Панели контента */
+        .panel {
+            display: none;
+            padding: 32px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .panel.active-panel {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* ГЛАВНАЯ ПАНЕЛЬ */
+        .game-hero {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 32px;
+            padding: 28px;
+        }
+
+        .game-icon {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(145deg, #2a1520, #0e0918);
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ff4d6d;
+            box-shadow: 0 0 25px rgba(255, 77, 109, 0.4);
+        }
+
+        .game-icon .big-svg {
+            width: 90px;
+            height: 90px;
+        }
+
+        .game-icon .version {
+            font-size: 11px;
+            background: #ff4d6d;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 12px;
+            color: white;
+        }
+
+        .game-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .game-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .game-title small {
+            font-size: 14px;
+            background: #ff4d6d30;
+            padding: 4px 12px;
+            border-radius: 40px;
+            margin-left: 12px;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .desc {
+            color: #b0b3c0;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .launch-btn {
+            background: linear-gradient(95deg, #e62e52, #b81a3a);
+            border: none;
+            padding: 14px 42px;
+            border-radius: 60px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: 0.1s linear;
+            font-family: inherit;
+            box-shadow: 0 6px 0 0 #5e0a1f;
+        }
+
+        .launch-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 0 #5e0a1f;
+        }
+
+        .control-panel {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 28px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .control-title {
+            color: #ff8aa3;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .buttons-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .ctrl-btn {
+            background: #161a2d;
+            border: 1px solid #2a2f44;
+            padding: 10px 24px;
+            border-radius: 60px;
+            color: #ccd6f0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.1s;
+            font-size: 14px;
+        }
+
+        .ctrl-btn:active {
+            background: #ff4d6d;
+            color: white;
+            transform: scale(0.96);
+            border-color: #ff4d6d;
+        }
+
+        .status-bar {
+            background: #03050bcc;
+            padding: 14px 28px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+            font-family: monospace;
+            border-top: 1px solid #ff4d6d;
+            color: #8bffc1;
+        }
+
+        /* БИБЛИОТЕКА */
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .game-card {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 28px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 77, 109, 0.2);
+            transition: 0.2s;
+        }
+
+        .game-card:hover {
+            border-color: #ff4d6d;
+            transform: translateY(-5px);
+        }
+
+        .game-card .game-emoji {
+            font-size: 55px;
+            margin-bottom: 12px;
+        }
+
+        .game-card h4 {
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .play-lib-btn {
+            background: #ff4d6d;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            margin-top: 12px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* НАСТРОЙКИ */
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 16px 0;
+            border-bottom: 1px solid #2a2e44;
+        }
+
+        .setting-label {
+            color: #ddd;
+            font-weight: 500;
+        }
+
+        input[type="range"] {
+            width: 250px;
+            max-width: 100%;
+        }
+
+        .setting-btn {
+            background: #252a41;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1e2fcc;
+            backdrop-filter: blur(12px);
+            padding: 12px 28px;
+            border-radius: 60px;
+            color: #ffccdd;
+            font-weight: 500;
+            z-index: 1000;
+            pointer-events: none;
+            font-size: 14px;
+            border: 1px solid #ff4d6d;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 12px; }
+            .header { padding: 16px 20px; }
+            .panel { padding: 20px; }
+            .game-hero { flex-direction: column; align-items: center; text-align: center; }
+            .game-title { font-size: 28px; }
+            .launch-btn { font-size: 18px; padding: 12px 32px; }
+            .logo-text { font-size: 20px; }
+            .toast { white-space: normal; text-align: center; max-width: 90%; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="bluestacks-card">
+        <!-- Хедер с SVG логотипом -->
+        <div class="header">
+            <div class="logo-area">
+                <!-- КАСТОМНЫЙ SVG ЛОГОТИП МАТРЁШКИ -->
+                <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="25" y="35" width="50" height="50" rx="12" fill="url(#gradBody)" stroke="#ff4d6d" stroke-width="2.5"/>
+                    <circle cx="50" cy="52" r="8" fill="url(#gradFace)" stroke="#ff8aa3" stroke-width="1.5"/>
+                    <circle cx="46" cy="50" r="1.5" fill="white"/>
+                    <circle cx="54" cy="50" r="1.5" fill="white"/>
+                    <path d="M47 56 Q50 60 53 56" stroke="#ff8aa3" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <rect x="30" y="25" width="40" height="14" rx="6" fill="url(#gradHat)" stroke="#ff4d6d" stroke-width="2"/>
+                    <path d="M40 32 L50 25 L60 32" stroke="#ff4d6d" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <circle cx="50" cy="70" r="2" fill="#ff8aa3"/>
+                    <defs>
+                        <linearGradient id="gradBody" x1="25" y1="35" x2="75" y2="85" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#ff2d55"/>
+                            <stop offset="1" stop-color="#8a1a2e"/>
+                        </linearGradient>
+                        <linearGradient id="gradHat" x1="30" y1="25" x2="70" y2="39" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#ff6b8a"/>
+                            <stop offset="1" stop-color="#cc1a3e"/>
+                        </linearGradient>
+                        <linearGradient id="gradFace" x1="42" y1="44" x2="58" y2="60" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#ffd6c0"/>
+                            <stop offset="1" stop-color="#ffb080"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="logo-text">BLUESTACKS <span>MATRYOSHKA</span> RP</div>
+                <div class="badge">CUSTOM EDITION</div>
+            </div>
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="home">🏠 ГЛАВНАЯ</button>
+                <button class="tab-btn" data-tab="library">📚 БИБЛИОТЕКА</button>
+                <button class="tab-btn" data-tab="settings">⚙️ НАСТРОЙКИ</button>
+            </div>
+        </div>
+
+        <!-- ГЛАВНАЯ -->
+        <div id="homePanel" class="panel active-panel">
+            <div class="game-hero">
+                <div class="game-icon">
+                    <svg class="big-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="25" y="35" width="50" height="50" rx="12" fill="url(#gradBody2)" stroke="#ff4d6d" stroke-width="2.5"/>
+                        <circle cx="50" cy="52" r="8" fill="#ffd6c0" stroke="#ff8aa3" stroke-width="1.5"/>
+                        <circle cx="46" cy="50" r="1.8" fill="#2d2d2d"/>
+                        <circle cx="54" cy="50" r="1.8" fill="#2d2d2d"/>
+                        <path d="M47 56 Q50 60 53 56" stroke="#b83a5e" stroke-width="1.5" fill="none"/>
+                        <rect x="30" y="25" width="40" height="14" rx="6" fill="url(#gradHat2)" stroke="#ff4d6d" stroke-width="2"/>
+                        <path d="M40 32 L50 25 L60 32" stroke="#ff4d6d" stroke-width="2" fill="none"/>
+                        <defs>
+                            <linearGradient id="gradBody2" x1="25" y1="35" x2="75" y2="85">
+                                <stop stop-color="#ff2d55"/><stop offset="1" stop-color="#8a1a2e"/>
+                            </linearGradient>
+                            <linearGradient id="gradHat2" x1="30" y1="25" x2="70" y2="39">
+                                <stop stop-color="#ff6b8a"/><stop offset="1" stop-color="#cc1a3e"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="version">v4.5.2</div>
+                </div>
+                <div class="game-info">
+                    <div class="game-title">Матрёшка RP <small>Эксклюзив для BlueStacks</small></div>
+                    <div class="rating">★★★★★ 4.98 (1.8M отзывов)</div>
+                    <div class="desc">
+                        Полное погружение в ролевой мир. Кастомная прошивка эмулятора с поддержкой макросов, 
+                        высоким FPS и уникальным дизайном «Матрешка RP Edition».
+                    </div>
+                    <button class="launch-btn" id="launchBlueStacksBtn">▶ ЗАПУСТИТЬ BLUESTACKS</button>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <div class="control-title">🎛️ УПРАВЛЕНИЕ ЭМУЛЯТОРОМ</div>
+                <div class="buttons-grid">
+                    <div class="ctrl-btn" data-action="keyboard">⌨️ WASD / Клавиатура</div>
+                    <div class="ctrl-btn" data-action="mouse">🖱️ Управление мышью</div>
+                    <div class="ctrl-btn" data-action="gamepad">🎮 Геймпад (XInput)</div>
+                    <div class="ctrl-btn" data-action="macro">⚡ Макросы RP</div>
+                    <div class="ctrl-btn" data-action="screenshot">📸 Скриншот</div>
+                    <div class="ctrl-btn" data-action="voice">🎙️ Голосовой чат</div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 16px;">
+                <div style="background:#0b0e1a; border-radius: 24px; padding: 16px;">
+                    <div style="color:#ff8aa3;">🕹️ ТЕКУЩАЯ СЕССИЯ</div>
+                    <div style="font-size: 24px; color:white;"><span id="fpsCount">60</span> FPS</div>
+                    <div>CPU: 24% | RAM: 2.8GB</div>
+                </div>
+                <div style="background:#0b0e1a; border-radius: 24px; padding: 16px;">
+                    <div style="color:#ff8aa3;">👥 ИГРОКИ ОНЛАЙН</div>
+                    <div style="font-size: 28px; color:#7effb3;" id="onlineCounter">2,451</div>
+                    <div>через BlueStacks</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- БИБЛИОТЕКА -->
+        <div id="libraryPanel" class="panel">
+            <h2 style="color: white; margin-bottom: 24px;">📖 Мои игры (BlueStacks)</h2>
+            <div class="library-grid">
+                <div class="game-card"><div class="game-emoji">🪆🔥</div><h4>Матрёшка RP</h4><button class="play-lib-btn">▶ Играть</button></div>
+                <div class="game-card"><div class="game-emoji">🏎️💨</div><h4>Street RP Race</h4><button class="play-lib-btn">▶ Играть</button></div>
+                <div class="game-card"><div class="game-emoji">🔫🎯</div><h4>Matryoshka Combat</h4><button class="play-lib-btn">▶ Играть</button></div>
+                <div class="game-card"><div class="game-emoji">🏙️🚔</div><h4>RP Life Online</h4><button class="play-lib-btn">▶ Играть</button></div>
+            </div>
+        </div>
+
+        <!-- НАСТРОЙКИ -->
+        <div id="settingsPanel" class="panel">
+            <h2 style="color: white; margin-bottom: 24px;">⚙️ Настройки BlueStacks Matryoshka</h2>
+            <div class="settings-list">
+                <div class="setting-row"><span class="setting-label">🎚️ Производительность (CPU / RAM)</span><input type="range" min="2" max="8" step="1" value="4" id="cpuSlider"><span id="cpuVal" style="color:#ff8aa3;">4 ядра</span></div>
+                <div class="setting-row"><span class="setting-label">📺 Разрешение экрана</span><select id="resSelect" style="background:#1a1e32; color:white; border-radius:40px; padding:8px;"><option>1920x1080</option><option selected>1280x720</option><option>854x480</option></select></div>
+                <div class="setting-row"><span class="setting-label">🎨 Интерфейс / Тема</span><button class="setting-btn" id="themeToggleBtn">🌙 Тёмная / Светлая</button></div>
+                <div class="setting-row"><span class="setting-label">📳 Вибрация отклика</span><button class="setting-btn" id="vibeTestBtn">Тест вибрации</button></div>
+                <div class="setting-row"><span class="setting-label">🔄 Сброс настроек эмулятора</span><button class="setting-btn" id="resetBtn">Сбросить</button></div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <span>🟢 BlueStacks Matryoshka Edition | Engine: Android 11</span>
+            <span>🎮 Готов к запуску</span>
+            <span>📦 Версия лаунчера: 2.1.0</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showToast(msg) {
+        let old = document.querySelector('.toast');
+        if(old) old.remove();
+        let toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerText = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+    }
+
+    // Табы
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = { home: document.getElementById('homePanel'), library: document.getElementById('libraryPanel'), settings: document.getElementById('settingsPanel') };
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            Object.values(panels).forEach(p => p.classList.remove('active-panel'));
+            panels[tabId].classList.add('active-panel');
+            tabs.forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            showToast(`📂 Раздел: ${btn.innerText}`);
+        });
+    });
+
+    // Запуск
+    document.getElementById('launchBlueStacksBtn').addEventListener('click', () => {
+        showToast('🚀 Запуск BlueStacks Matryoshka RP Edition...');
+        let btn = document.getElementById('launchBlueStacksBtn');
+        btn.innerText = '⏳ ЗАПУСК...';
+        btn.disabled = true;
+        setTimeout(() => {
+            showToast('✅ BlueStacks активен! Игра "Матрёшка RP" загружена.');
+            btn.innerText = '▶ ЗАПУСТИТЬ BLUESTACKS';
+            btn.disabled = false;
+        }, 1800);
+    });
+
+    // Кнопки управления
+    document.querySelectorAll('.ctrl-btn').forEach(btn => {
+        btn.addEventListener('click', () => showToast(`⚡ ${btn.innerText}`));
+    });
+    document.querySelectorAll('.play-lib-btn').forEach(btn => {
+        btn.addEventListener('click', () => showToast('🎮 Запуск игры через BlueStacks...'));
+    });
+
+    // Динамика FPS и онлайн
+    let fps = 60;
+    setInterval(() => { fps = 55 + Math.floor(Math.random() * 25); document.getElementById('fpsCount').innerText = fps; }, 3000);
+    let online = 2451;
+    setInterval(() => { online = Math.max(1200, online + Math.floor(Math.random() * 40) - 12); document.getElementById('onlineCounter').innerText = online.toLocaleString(); }, 5000);
+
+    // Настройки
+    document.getElementById('cpuSlider').addEventListener('input', (e) => { document.getElementById('cpuVal').innerText = e.target.value + ' ядер'; showToast(`⚙️ CPU: ${e.target.value} ядер`); });
+    document.getElementById('resSelect').addEventListener('change', (e) => showToast(`📺 Разрешение: ${e.target.value}`));
+    document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        let dark = document.body.style.background.includes('0c0f1c');
+        if(dark) { document.body.style.background = 'linear-gradient(145deg, #e9edff, #cdd6ff)'; showToast('☀️ Светлая тема'); }
+        else { document.body.style.background = 'linear-gradient(145deg, #0c0f1c 0%, #05070f 100%)'; showToast('🌙 Тёмная тема'); }
+    });
+    document.getElementById('vibeTestBtn').addEventListener('click', () => { if('vibrate' in navigator) { navigator.vibrate(200); showToast('📳 Вибрация!'); } else showToast('⚠️ Вибрация не поддерживается'); });
+    document.getElementById('resetBtn').addEventListener('click', () => showToast('🔄 Сброс настроек выполнен'));
+</script>
+</body>
+</html>
