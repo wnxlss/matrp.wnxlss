@@ -7,15 +7,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Meneo">
     
     <title>Meneo - Знакомства будущего</title>
     
-    <!-- Логотип для вкладок и рабочего стола -->
     <link rel="icon" type="image/png" sizes="512x512" href="https://i.ibb.co/LzhYYfQf/photo-2026-07-07-12-41-58-no-bg-preview-carve-photos.png">
     <link rel="apple-touch-icon" href="https://i.ibb.co/LzhYYfQf/photo-2026-07-07-12-41-58-no-bg-preview-carve-photos.png">
+    <link rel="apple-touch-icon-precomposed" href="https://i.ibb.co/LzhYYfQf/photo-2026-07-07-12-41-58-no-bg-preview-carve-photos.png">
     <link rel="shortcut icon" href="https://i.ibb.co/LzhYYfQf/photo-2026-07-07-12-41-58-no-bg-preview-carve-photos.png">
     
-    <!-- Манифест для PWA -->
     <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22Meneo%22%2C%22short_name%22%3A%22Meneo%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230a0a1a%22%2C%22theme_color%22%3A%22%230a0a1a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fi.ibb.co%2FLzhYYfQf%2Fphoto-2026-07-07-12-41-58-no-bg-preview-carve-photos.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -277,125 +277,616 @@
             flex-shrink: 0;
         }
 
+        /* ===== РЕАЛИСТИЧНЫЕ ЛЮДИ ===== */
         .hero-right {
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            min-height: 420px;
+            overflow: visible;
         }
 
-        .hero-robots {
+        .couple-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            height: 420px;
             display: flex;
-            gap: 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ===== ФИГУРЫ ЛЮДЕЙ ===== */
+        .person {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Голова */
+        .head {
+            width: 76px;
+            height: 80px;
+            border-radius: 50% 50% 45% 45%;
             position: relative;
-            animation: floatRobots 6s ease-in-out infinite;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
         }
 
-        @keyframes floatRobots {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-16px); }
+        .head-boy {
+            background: radial-gradient(ellipse at 40% 30%, #f5d0b8, #d4a08a);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3), inset 0 -10px 30px rgba(180,120,100,0.2);
         }
 
-        .hero-robot {
-            width: clamp(80px, 15vw, 120px);
-            height: clamp(100px, 18vw, 150px);
+        .head-girl {
+            background: radial-gradient(ellipse at 40% 30%, #fde8d0, #eac8b0);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3), inset 0 -10px 30px rgba(200,160,140,0.2);
+        }
+
+        /* ===== КРАСИВАЯ ПРИЧЕСКА - ПАРЕНЬ ===== */
+        .hair-boy {
+            position: absolute;
+            width: 88px;
+            height: 52px;
+            background: linear-gradient(180deg, #3d2b1f 0%, #2a1a10 100%);
+            top: -14px;
+            border-radius: 60% 60% 0 0  / 80% 80% 0 0;
+            clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+            z-index: 1;
+        }
+
+        /* Верхняя часть прически (объемная) */
+        .hair-boy .top {
+            position: absolute;
+            top: -6px;
+            left: 5%;
+            width: 90%;
+            height: 20px;
+            background: linear-gradient(180deg, #4a3528, #3d2b1f);
+            border-radius: 50% 50% 0 0;
+            clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+        }
+
+        /* Стильная укладка - спереди */
+        .hair-boy .front {
+            position: absolute;
+            bottom: -4px;
+            left: 10%;
+            width: 80%;
+            height: 18px;
+            background: #3d2b1f;
+            border-radius: 0 0 40% 40%;
+            clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100%);
+        }
+
+        .hair-boy .front::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            width: 20%;
+            height: 12px;
+            background: #4a3528;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(-10deg);
+        }
+
+        .hair-boy .front::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 15%;
+            width: 20%;
+            height: 12px;
+            background: #4a3528;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(10deg);
+        }
+
+        /* Боковые пряди */
+        .hair-boy .side-left {
+            position: absolute;
+            bottom: -8px;
+            left: -6px;
+            width: 18px;
+            height: 24px;
+            background: #3d2b1f;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(10deg);
+            box-shadow: -2px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .hair-boy .side-right {
+            position: absolute;
+            bottom: -8px;
+            right: -6px;
+            width: 18px;
+            height: 24px;
+            background: #3d2b1f;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(-10deg);
+            box-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* ===== КРАСИВАЯ ПРИЧЕСКА - ДЕВУШКА ===== */
+        .hair-girl {
+            position: absolute;
+            width: 90px;
+            height: 56px;
+            background: linear-gradient(180deg, #5a3d2b 0%, #3d2b1f 100%);
+            top: -16px;
+            border-radius: 60% 60% 0 0  / 80% 80% 0 0;
+            clip-path: polygon(0% 0%, 100% 0%, 92% 100%, 8% 100%);
+            z-index: 1;
+        }
+
+        /* Объемная верхняя часть */
+        .hair-girl .volum {
+            position: absolute;
+            top: -8px;
+            left: 3%;
+            width: 94%;
+            height: 24px;
+            background: linear-gradient(180deg, #6a4d3b, #5a3d2b);
+            border-radius: 50% 50% 0 0;
+            clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);
+        }
+
+        /* Длинные локоны сзади */
+        .hair-girl .back-curl {
+            position: absolute;
+            bottom: -12px;
+            left: 8%;
+            width: 16px;
+            height: 30px;
+            background: #5a3d2b;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(-5deg);
+            box-shadow: -2px 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .hair-girl .back-curl2 {
+            position: absolute;
+            bottom: -12px;
+            right: 8%;
+            width: 16px;
+            height: 30px;
+            background: #5a3d2b;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(5deg);
+            box-shadow: 2px 6px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Длинные пряди спереди */
+        .hair-girl .front-curl {
+            position: absolute;
+            bottom: -4px;
+            left: 12%;
+            width: 14px;
+            height: 22px;
+            background: #5a3d2b;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(-12deg);
+        }
+
+        .hair-girl .front-curl2 {
+            position: absolute;
+            bottom: -4px;
+            right: 12%;
+            width: 14px;
+            height: 22px;
+            background: #5a3d2b;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(12deg);
+        }
+
+        /* Длинные волосы (основная масса) */
+        .hair-girl .long-hair {
+            position: absolute;
+            bottom: -35px;
+            left: 15%;
+            width: 70%;
+            height: 45px;
+            background: linear-gradient(180deg, #5a3d2b, #3d2b1f);
+            border-radius: 0 0 30% 30%;
+            clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+            opacity: 0.9;
+        }
+
+        .hair-girl .long-hair::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 30%;
+            height: 15px;
+            background: #4a3528;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(-8deg);
+        }
+
+        .hair-girl .long-hair::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 10%;
+            width: 30%;
+            height: 15px;
+            background: #4a3528;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(8deg);
+        }
+
+        /* Бантик */
+        .bow {
+            position: absolute;
+            top: -6px;
+            right: -4px;
+            font-size: 24px;
+            animation: bowWiggle 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 2px 10px rgba(233,78,119,0.3));
+            z-index: 5;
+        }
+
+        @keyframes bowWiggle {
+            0%, 100% { transform: rotate(-10deg) scale(1); }
+            50% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        /* Глаза */
+        .eyes {
+            position: absolute;
+            display: flex;
+            gap: 18px;
+            top: 32px;
+            z-index: 3;
+        }
+
+        .eye {
+            width: 11px;
+            height: 13px;
+            background: radial-gradient(ellipse at 40% 30%, #4a3528, #1a0e08);
+            border-radius: 50%;
             position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        .hero-robot .head {
-            width: clamp(66px, 12vw, 100px);
-            height: clamp(52px, 10vw, 80px);
-            border-radius: 16px 16px 6px 6px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .hero-robot .head .eye {
-            width: clamp(8px, 1.5vw, 14px);
-            height: clamp(8px, 1.5vw, 14px);
+        .eye::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
             background: white;
             border-radius: 50%;
-            position: absolute;
-            top: clamp(16px, 3vw, 25px);
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            top: 2px;
+            left: 2px;
+            box-shadow: 0 0 4px rgba(255,255,255,0.3);
         }
 
-        .hero-robot .head .eye.l { left: clamp(12px, 2vw, 18px); }
-        .hero-robot .head .eye.r { right: clamp(12px, 2vw, 18px); }
-
-        .hero-robot .head .mouth {
+        .eye::before {
+            content: '';
             position: absolute;
-            bottom: clamp(12px, 2vw, 18px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: clamp(20px, 4vw, 30px);
-            height: clamp(5px, 1vw, 8px);
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-        }
-
-        .hero-robot .body {
-            width: clamp(52px, 10vw, 80px);
-            height: clamp(36px, 7vw, 55px);
-            border-radius: 6px 6px 12px 12px;
-            margin: 6px auto 0;
-        }
-
-        .hero-robot .body .heart {
-            position: absolute;
-            bottom: clamp(6px, 1vw, 10px);
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: clamp(14px, 2.5vw, 20px);
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            top: 6px;
+            left: 7px;
             opacity: 0.5;
         }
 
-        .hero-robot.blue .head {
-            background: linear-gradient(145deg, #4A90E2, #2E6BB5);
-            box-shadow: 0 8px 40px rgba(74, 144, 226, 0.3);
-        }
-        .hero-robot.blue .body {
-            background: linear-gradient(145deg, #4A90E2, #2E6BB5);
-        }
-
-        .hero-robot.pink .head {
-            background: linear-gradient(145deg, #E94E77, #C93D61);
-            box-shadow: 0 8px 40px rgba(233, 78, 119, 0.3);
-        }
-        .hero-robot.pink .body {
-            background: linear-gradient(145deg, #E94E77, #C93D61);
-        }
-
-        .hero-robot.blue { transform: translateX(10px); z-index: 2; }
-        .hero-robot.pink { transform: translateX(-10px); z-index: 1; }
-
-        .hero-robot .sparkle {
+        /* Ресницы */
+        .eye .lash {
             position: absolute;
-            width: clamp(8px, 1.2vw, 12px);
-            height: clamp(8px, 1.2vw, 12px);
+            width: 2px;
+            height: 6px;
+            background: #2d1b0e;
             border-radius: 50%;
-            animation: sparkle 2.5s infinite;
         }
 
-        .hero-robot.blue .sparkle {
-            background: #4A90E2;
-            box-shadow: 0 0 25px rgba(74, 144, 226, 0.5);
-            top: -8px;
-            right: -8px;
-            animation-delay: 0.5s;
+        .eye .lash-top { top: -4px; }
+        .eye .lash-bottom { bottom: -3px; }
+
+        /* Брови */
+        .eyebrow {
+            position: absolute;
+            width: 16px;
+            height: 3px;
+            background: #2d1b0e;
+            border-radius: 10px;
+            top: 24px;
+            z-index: 3;
         }
 
-        .hero-robot.pink .sparkle {
-            background: #E94E77;
-            box-shadow: 0 0 25px rgba(233, 78, 119, 0.5);
-            bottom: -8px;
-            left: -8px;
-            animation-delay: 1.2s;
+        .eyebrow.left { left: 12px; transform: rotate(-10deg); }
+        .eyebrow.right { right: 12px; transform: rotate(10deg); }
+
+        /* Рот */
+        .mouth {
+            position: absolute;
+            bottom: 18px;
+            width: 20px;
+            height: 10px;
+            border-bottom: 3px solid #c0392b;
+            border-radius: 0 0 50% 50%;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(192,57,43,0.1);
         }
 
-        @keyframes sparkle {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-            50% { transform: scale(1.6) rotate(180deg); opacity: 0.2; }
+        .mouth-boy {
+            border-bottom-color: #b83a2a;
+            width: 16px;
+            height: 8px;
+        }
+
+        .mouth-girl {
+            border-bottom-color: #d44a3a;
+            width: 20px;
+            height: 10px;
+        }
+
+        /* Румянец */
+        .blush {
+            position: absolute;
+            width: 18px;
+            height: 12px;
+            border-radius: 50%;
+            bottom: 30px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .blush-left { left: 2px; }
+        .blush-right { right: 2px; }
+
+        .blush-boy {
+            background: radial-gradient(ellipse, rgba(200,120,100,0.25), transparent);
+        }
+
+        .blush-girl {
+            background: radial-gradient(ellipse, rgba(220,140,160,0.35), transparent);
+        }
+
+        /* Шея */
+        .neck {
+            width: 26px;
+            height: 14px;
+            background: linear-gradient(180deg, #d4a08a, #c99882);
+            border-radius: 0 0 50% 50%;
+            margin-top: -4px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .neck-girl {
+            background: linear-gradient(180deg, #eac8b0, #dbb8a0);
+        }
+
+        /* Тело */
+        .body-person {
+            width: 58px;
+            height: 84px;
+            border-radius: 22px 22px 12px 12px;
+            margin-top: -6px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+
+        .body-boy {
+            background: linear-gradient(180deg, #4A90E2, #2E6BB5);
+            box-shadow: 0 4px 30px rgba(74, 144, 226, 0.2), inset 0 -10px 30px rgba(0,0,0,0.1);
+        }
+
+        .body-girl {
+            background: linear-gradient(180deg, #E94E77, #C93D61);
+            box-shadow: 0 4px 30px rgba(233, 78, 119, 0.2), inset 0 -10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Воротник */
+        .collar {
+            position: absolute;
+            top: -4px;
+            width: 32px;
+            height: 14px;
+            border-radius: 0 0 50% 50%;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.05);
+        }
+
+        /* Руки */
+        .arms {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .arm {
+            position: absolute;
+            width: 12px;
+            height: 36px;
+            border-radius: 10px;
+            top: 24px;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .arm-left {
+            left: -12px;
+            transform: rotate(25deg);
+            transform-origin: top center;
+        }
+
+        .arm-right {
+            right: -12px;
+            transform: rotate(-25deg);
+            transform-origin: top center;
+        }
+
+        .arm-boy {
+            background: linear-gradient(180deg, #d4a08a, #c0907a);
+        }
+
+        .arm-girl {
+            background: linear-gradient(180deg, #eac8b0, #dbb8a0);
+        }
+
+        /* Ноги */
+        .legs {
+            display: flex;
+            gap: 8px;
+            margin-top: -2px;
+            position: relative;
+            z-index: 0;
+        }
+
+        .leg {
+            width: 16px;
+            height: 38px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .leg-boy {
+            background: linear-gradient(180deg, #2d4a7a, #1a3360);
+        }
+
+        .leg-girl {
+            background: linear-gradient(180deg, #c93d61, #a83252);
+        }
+
+        /* Обувь */
+        .shoe {
+            position: absolute;
+            bottom: -4px;
+            width: 22px;
+            height: 9px;
+            border-radius: 50% 50% 30% 30%;
+        }
+
+        .shoe-boy {
+            background: #1a1a2e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .shoe-girl {
+            background: #2d1b1b;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* ===== ПОЗИЦИИ И АНИМАЦИЯ ===== */
+
+        .person-boy {
+            left: 5%;
+            bottom: 10%;
+            z-index: 2;
+            animation: boyFloat 4.5s ease-in-out infinite;
+        }
+
+        @keyframes boyFloat {
+            0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+            50% { transform: translateY(-8px) rotate(-1.5deg); }
+        }
+
+        .person-girl {
+            right: 5%;
+            bottom: 10%;
+            z-index: 2;
+            animation: girlFloat 4.5s ease-in-out infinite 0.6s;
+        }
+
+        @keyframes girlFloat {
+            0%, 100% { transform: translateY(0) rotate(0.5deg); }
+            50% { transform: translateY(-8px) rotate(1.5deg); }
+        }
+
+        /* Анимация поцелуя */
+        .person-boy.kissing {
+            animation: kissBoy 3s ease-in-out infinite;
+        }
+
+        @keyframes kissBoy {
+            0%, 100% { 
+                transform: translateX(0) translateY(0) rotate(-2deg) scale(1);
+                left: 5%;
+            }
+            50% { 
+                transform: translateX(35%) translateY(-10px) rotate(-6deg) scale(1.02);
+                left: 5%;
+            }
+        }
+
+        .person-girl.kissing {
+            animation: kissGirl 3s ease-in-out infinite;
+        }
+
+        @keyframes kissGirl {
+            0%, 100% { 
+                transform: translateX(0) translateY(0) rotate(2deg) scale(1);
+                right: 5%;
+            }
+            50% { 
+                transform: translateX(-35%) translateY(-10px) rotate(6deg) scale(1.02);
+                right: 5%;
+            }
+        }
+
+        /* Глаза моргают */
+        @keyframes blink {
+            0%, 45%, 55%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.1); }
+        }
+
+        .eye {
+            animation: blink 4s infinite;
+        }
+
+        /* Сердечки */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            overflow: visible;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 34px;
+            opacity: 0;
+            animation: heartFloat 2.8s ease-out forwards;
+            filter: drop-shadow(0 0 25px rgba(233,78,119,0.4));
+        }
+
+        @keyframes heartFloat {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0.3) rotate(0deg);
+            }
+            40% {
+                opacity: 1;
+                transform: translate(var(--tx), var(--ty)) scale(1.4) rotate(25deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(var(--tx) * 1.8), calc(var(--ty) * 2.5)) scale(0.2) rotate(50deg);
+            }
         }
 
         /* ===== В РАЗРАБОТКЕ ===== */
@@ -564,200 +1055,137 @@
             color: rgba(255,255,255,0.5);
         }
 
-        /* ===== TOAST УВЕДОМЛЕНИЯ ===== */
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 14px 24px;
-            border-radius: 16px;
-            background: rgba(20, 20, 50, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.06);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            z-index: 9999;
-            animation: slideUpToast 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-align: center;
-            max-width: 90%;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            pointer-events: none;
-        }
-
-        @keyframes slideUpToast {
-            from { transform: translateX(-50%) translateY(100px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
-        }
-
-        .toast.success { border-color: rgba(46, 213, 115, 0.2); }
-        .toast.error { border-color: rgba(255, 71, 87, 0.2); }
-        .toast.info { border-color: rgba(74, 144, 226, 0.2); }
-
         /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 12px;
-            }
-
+            .container { padding: 0 12px; }
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding: 24px 0 36px;
-                gap: 20px;
+                padding: 20px 0 28px;
+                gap: 16px;
             }
+            .hero-left p { margin-left: auto; margin-right: auto; max-width: 100%; }
+            .btn-get-started { max-width: 100%; margin: 0 auto; }
+            .hero-right { min-height: 300px; }
+            .couple-container { max-width: 320px; height: 300px; }
 
-            .hero-left p {
-                margin-left: auto;
-                margin-right: auto;
-                max-width: 100%;
-            }
+            .head { width: 56px; height: 60px; }
+            .body-person { width: 42px; height: 64px; }
+            .leg { width: 12px; height: 28px; }
+            .arm { width: 9px; height: 28px; top: 18px; }
+            .arm-left { left: -9px; }
+            .arm-right { right: -9px; }
 
-            .btn-get-started {
-                max-width: 100%;
-                margin: 0 auto;
-            }
+            .hair-boy { width: 66px; height: 40px; top: -10px; }
+            .hair-girl { width: 68px; height: 44px; top: -12px; }
+            .hair-girl .long-hair { bottom: -28px; height: 36px; }
 
-            .hero-robots {
-                transform: scale(0.8);
-            }
+            .eyes { gap: 14px; top: 24px; }
+            .eye { width: 8px; height: 10px; }
+            .mouth { width: 14px; height: 8px; bottom: 14px; border-width: 2.5px; }
+            .heart { font-size: 24px; }
 
-            .features-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-
-            .feature-card {
-                padding: 18px 14px;
-            }
-
-            .feature-card .icon-wrapper {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-
-            .header {
-                padding: 10px 0;
-                min-height: 52px;
-            }
-
-            .logo-img {
-                width: 38px;
-                height: 38px;
-            }
-
-            .brand-name {
-                font-size: 18px;
-            }
-
-            .btn-telegram {
-                padding: 6px 14px;
-                font-size: 13px;
-            }
-
-            .btn-telegram svg {
-                width: 16px;
-                height: 16px;
-            }
-
-            .development .big-text {
-                font-size: 32px;
-            }
-
-            .footer {
-                flex-direction: column;
-                text-align: center;
-                gap: 8px;
-            }
-
-            .footer-links {
-                justify-content: center;
-            }
+            .features-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .feature-card { padding: 18px 14px; }
+            .feature-card .icon-wrapper { width: 40px; height: 40px; font-size: 20px; }
+            .header { padding: 10px 0; min-height: 52px; }
+            .logo-img { width: 38px; height: 38px; }
+            .brand-name { font-size: 18px; }
+            .btn-telegram { padding: 6px 14px; font-size: 13px; }
+            .btn-telegram svg { width: 16px; height: 16px; }
+            .development .big-text { font-size: 32px; }
+            .footer { flex-direction: column; text-align: center; gap: 8px; }
+            .footer-links { justify-content: center; }
         }
 
         @media (max-width: 480px) {
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
+            .features-grid { grid-template-columns: 1fr; gap: 10px; }
+            .hero-left h1 { font-size: 28px; }
+            .hero-right { min-height: 240px; }
+            .couple-container { max-width: 240px; height: 240px; }
 
-            .hero-left h1 {
-                font-size: 28px;
-            }
+            .head { width: 44px; height: 46px; }
+            .body-person { width: 32px; height: 50px; margin-top: -4px; }
+            .leg { width: 9px; height: 22px; gap: 5px; }
+            .arm { width: 7px; height: 22px; top: 14px; }
+            .arm-left { left: -7px; }
+            .arm-right { right: -7px; }
 
-            .hero-robots {
-                transform: scale(0.65);
-            }
+            .hair-boy { width: 52px; height: 32px; top: -8px; }
+            .hair-boy .top { height: 14px; }
+            .hair-boy .front { height: 12px; }
+            .hair-boy .side-left,
+            .hair-boy .side-right { width: 12px; height: 16px; bottom: -4px; }
 
-            .hero {
-                padding: 16px 0 28px;
-                gap: 12px;
-            }
+            .hair-girl { width: 54px; height: 36px; top: -10px; }
+            .hair-girl .volum { height: 16px; }
+            .hair-girl .long-hair { bottom: -22px; height: 28px; width: 60%; left: 20%; }
+            .hair-girl .back-curl,
+            .hair-girl .back-curl2 { width: 12px; height: 22px; bottom: -8px; }
+            .hair-girl .front-curl,
+            .hair-girl .front-curl2 { width: 10px; height: 16px; bottom: -2px; }
 
-            .btn-get-started {
-                font-size: 15px;
-                padding: 12px 24px;
-            }
+            .eyes { gap: 10px; top: 18px; }
+            .eye { width: 6px; height: 8px; }
+            .eye::after { width: 3px; height: 3px; top: 1px; left: 1px; }
+            .mouth { width: 11px; height: 6px; bottom: 12px; border-width: 2px; }
+            .heart { font-size: 18px; }
+            .bow { font-size: 18px; top: -4px; right: -3px; }
+            .eyebrow { width: 12px; height: 2px; top: 18px; }
+            .eyebrow.left { left: 8px; }
+            .eyebrow.right { right: 8px; }
+            .neck { width: 18px; height: 10px; }
+            .blush { width: 12px; height: 8px; bottom: 24px; }
 
-            .logo-img {
-                width: 32px;
-                height: 32px;
-                border-radius: 8px;
-            }
+            .hero { padding: 12px 0 20px; gap: 8px; }
+            .btn-get-started { font-size: 15px; padding: 12px 24px; }
+            .logo-img { width: 32px; height: 32px; border-radius: 8px; }
+            .brand-name { font-size: 16px; }
+            .btn-telegram { padding: 5px 12px; font-size: 12px; }
+            .btn-telegram svg { width: 14px; height: 14px; }
 
-            .brand-name {
-                font-size: 16px;
-            }
+            .person-boy { left: 2%; }
+            .person-girl { right: 2%; }
 
-            .btn-telegram {
-                padding: 5px 12px;
-                font-size: 12px;
+            @keyframes kissBoy {
+                0%, 100% { transform: translateX(0) translateY(0) rotate(-2deg) scale(1); left: 2%; }
+                50% { transform: translateX(45%) translateY(-6px) rotate(-6deg) scale(1.02); left: 2%; }
             }
-
-            .btn-telegram svg {
-                width: 14px;
-                height: 14px;
+            @keyframes kissGirl {
+                0%, 100% { transform: translateX(0) translateY(0) rotate(2deg) scale(1); right: 2%; }
+                50% { transform: translateX(-45%) translateY(-6px) rotate(6deg) scale(1.02); right: 2%; }
             }
         }
 
         @media (max-width: 360px) {
-            .brand-name {
-                font-size: 14px;
-            }
+            .brand-name { font-size: 14px; }
+            .logo-img { width: 28px; height: 28px; border-radius: 6px; }
+            .btn-telegram { padding: 4px 10px; font-size: 11px; }
+            .btn-telegram svg { width: 12px; height: 12px; }
+            .hero-left h1 { font-size: 24px; }
+            .hero-right { min-height: 200px; }
+            .couple-container { max-width: 200px; height: 200px; }
 
-            .logo-img {
-                width: 28px;
-                height: 28px;
-                border-radius: 6px;
-            }
+            .head { width: 36px; height: 38px; }
+            .body-person { width: 26px; height: 42px; }
+            .leg { width: 7px; height: 18px; }
+            .arm { width: 6px; height: 18px; top: 12px; }
+            .arm-left { left: -6px; }
+            .arm-right { right: -6px; }
 
-            .btn-telegram {
-                padding: 4px 10px;
-                font-size: 11px;
-            }
-
-            .btn-telegram svg {
-                width: 12px;
-                height: 12px;
-            }
-
-            .hero-left h1 {
-                font-size: 24px;
-            }
+            .hair-boy { width: 42px; height: 26px; top: -6px; }
+            .hair-girl { width: 44px; height: 30px; top: -8px; }
+            .eyes { gap: 8px; top: 15px; }
+            .eye { width: 5px; height: 6px; }
+            .mouth { width: 9px; height: 5px; bottom: 10px; border-width: 1.5px; }
+            .heart { font-size: 14px; }
+            .bow { font-size: 14px; }
         }
 
-        /* Для устройств с большим экраном */
         @media (min-width: 1400px) {
-            .container {
-                max-width: 1300px;
-            }
+            .container { max-width: 1300px; }
         }
 
-        /* Поддержка safe-area */
         @supports (padding: max(0px)) {
             .header {
                 padding-left: max(16px, env(safe-area-inset-left));
@@ -765,7 +1193,6 @@
             }
         }
 
-        /* Фикс для iOS */
         input, textarea, button, select {
             -webkit-appearance: none;
             appearance: none;
@@ -815,29 +1242,78 @@
                 </a>
             </div>
             <div class="hero-right">
-                <div class="hero-robots">
-                    <div class="hero-robot blue">
-                        <div class="head">
-                            <div class="eye l"></div>
-                            <div class="eye r"></div>
-                            <div class="mouth"></div>
-                            <div class="sparkle"></div>
+                <div class="couple-container">
+                    <!-- Мальчик -->
+                    <div class="person person-boy kissing" id="boy">
+                        <div class="head head-boy">
+                            <div class="hair hair-boy">
+                                <div class="top"></div>
+                                <div class="front"></div>
+                                <div class="side-left"></div>
+                                <div class="side-right"></div>
+                            </div>
+                            <div class="eyebrow left"></div>
+                            <div class="eyebrow right"></div>
+                            <div class="eyes">
+                                <div class="eye"><span class="lash lash-top"></span><span class="lash lash-bottom"></span></div>
+                                <div class="eye"><span class="lash lash-top"></span><span class="lash lash-bottom"></span></div>
+                            </div>
+                            <div class="blush blush-left blush-boy"></div>
+                            <div class="blush blush-right blush-boy"></div>
+                            <div class="mouth mouth-boy"></div>
                         </div>
-                        <div class="body">
-                            <div class="heart">💙</div>
+                        <div class="neck"></div>
+                        <div class="body-person body-boy">
+                            <div class="collar"></div>
+                            <div class="arms">
+                                <div class="arm arm-left arm-boy"></div>
+                                <div class="arm arm-right arm-boy"></div>
+                            </div>
+                        </div>
+                        <div class="legs">
+                            <div class="leg leg-boy"><div class="shoe shoe-boy"></div></div>
+                            <div class="leg leg-boy"><div class="shoe shoe-boy"></div></div>
                         </div>
                     </div>
-                    <div class="hero-robot pink">
-                        <div class="head">
-                            <div class="eye l"></div>
-                            <div class="eye r"></div>
-                            <div class="mouth"></div>
-                            <div class="sparkle"></div>
+
+                    <!-- Девочка -->
+                    <div class="person person-girl kissing" id="girl">
+                        <div class="head head-girl">
+                            <div class="hair hair-girl">
+                                <div class="volum"></div>
+                                <div class="back-curl"></div>
+                                <div class="back-curl2"></div>
+                                <div class="front-curl"></div>
+                                <div class="front-curl2"></div>
+                                <div class="long-hair"></div>
+                            </div>
+                            <div class="bow">🎀</div>
+                            <div class="eyebrow left"></div>
+                            <div class="eyebrow right"></div>
+                            <div class="eyes">
+                                <div class="eye"><span class="lash lash-top"></span><span class="lash lash-bottom"></span></div>
+                                <div class="eye"><span class="lash lash-top"></span><span class="lash lash-bottom"></span></div>
+                            </div>
+                            <div class="blush blush-left blush-girl"></div>
+                            <div class="blush blush-right blush-girl"></div>
+                            <div class="mouth mouth-girl"></div>
                         </div>
-                        <div class="body">
-                            <div class="heart">💗</div>
+                        <div class="neck neck-girl"></div>
+                        <div class="body-person body-girl">
+                            <div class="collar"></div>
+                            <div class="arms">
+                                <div class="arm arm-left arm-girl"></div>
+                                <div class="arm arm-right arm-girl"></div>
+                            </div>
+                        </div>
+                        <div class="legs">
+                            <div class="leg leg-girl"><div class="shoe shoe-girl"></div></div>
+                            <div class="leg leg-girl"><div class="shoe shoe-girl"></div></div>
                         </div>
                     </div>
+
+                    <!-- Сердечки -->
+                    <div class="hearts-container" id="heartsContainer"></div>
                 </div>
             </div>
         </section>
@@ -904,9 +1380,40 @@
     </div>
 
     <script>
-        // === ИНИЦИАЛИЗАЦИЯ ===
+        // === ГЕНЕРАЦИЯ СЕРДЕЧЕК ===
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartEmojis = ['❤️', '💕', '💗', '💖', '💘', '💝', '❤️‍🔥', '💞', '💓'];
+            
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                
+                const x = 25 + Math.random() * 50;
+                const y = 15 + Math.random() * 45;
+                const tx = (Math.random() - 0.5) * 100;
+                const ty = -40 - Math.random() * 80;
+                
+                heart.style.left = x + '%';
+                heart.style.top = y + '%';
+                heart.style.setProperty('--tx', tx + 'px');
+                heart.style.setProperty('--ty', ty + 'px');
+                heart.style.fontSize = (18 + Math.random() * 35) + 'px';
+                heart.style.animationDelay = (i * 0.25 + Math.random() * 0.5) + 's';
+                heart.style.animationDuration = (2.5 + Math.random() * 1.5) + 's';
+                
+                container.appendChild(heart);
+            }
+            
+            setTimeout(createHearts, 4000);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Анимация карточек
+            setTimeout(createHearts, 500);
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -922,30 +1429,17 @@
                 card.style.transition = `all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${i * 0.08}s`;
                 observer.observe(card);
             });
-
-            // Фикс для iOS Safari
-            if (window.navigator && window.navigator.userAgent.indexOf('iPhone') !== -1) {
-                document.querySelectorAll('input, textarea').forEach(el => {
-                    el.style.fontSize = '16px';
-                });
-            }
         });
 
-        // === PWA: ОБРАБОТКА УСТАНОВКИ ===
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // Можно показать кнопку установки
+            console.log('📲 Можно установить Meneo на рабочий стол');
         });
 
-        // === ПРОВЕРКА НА ТЕЛЕФОН ===
-        function isMobile() {
-            return /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
-        }
-
-        console.log('📱 Meneo оптимизирован для мобильных устройств!');
-        console.log('📲 Добавь сайт на рабочий стол для лучшего опыта');
+        console.log('💋 Meneo - романтическая анимация с красивыми прическами!');
+        console.log('📱 Оптимизирован для мобильных устройств');
         console.log('📢 Присоединяйся к Telegram: https://t.me/+tLg0TnSeORtjMTUx');
     </script>
 </body>
