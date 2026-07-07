@@ -2,19 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a1a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
     
     <title>Meneo - Знакомства будущего</title>
     
     <!-- Логотип для вкладок и рабочего стола -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a1a'/%3E%3Ccircle cx='35' cy='45' r='18' fill='%234A90E2'/%3E%3Ccircle cx='65' cy='45' r='18' fill='%23E94E77'/%3E%3Ccircle cx='35' cy='45' r='7' fill='white'/%3E%3Ccircle cx='65' cy='45' r='7' fill='white'/%3E%3Crect x='30' y='60' width='40' height='12' rx='4' fill='%23667eea'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a1a'/%3E%3Ccircle cx='35' cy='45' r='18' fill='%234A90E2'/%3E%3Ccircle cx='65' cy='45' r='18' fill='%23E94E77'/%3E%3Ccircle cx='35' cy='45' r='7' fill='white'/%3E%3Ccircle cx='65' cy='45' r='7' fill='white'/%3E%3Crect x='30' y='60' width='40' height='12' rx='4' fill='%23667eea'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://i.ibb.co/LzhYYfQf/photo-2026-07-07-12-41-58-no-bg-preview-carve-photos.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/LzhYYfQf/photo-2026-07-07-12-41-58-no-bg-preview-carve-photos.png">
+    <link rel="shortcut icon" href="https://i.ibb.co/LzhYYfQf/photo-2026-07-07-12-41-58-no-bg-preview-carve-photos.png">
     
     <!-- Манифест для PWA -->
-    <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22Meneo%22%2C%22short_name%22%3A%22Meneo%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230a0a1a%22%2C%22theme_color%22%3A%22%230a0a1a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a1a'/%3E%3Ccircle cx='35' cy='45' r='18' fill='%234A90E2'/%3E%3Ccircle cx='65' cy='45' r='18' fill='%23E94E77'/%3E%3Ccircle cx='35' cy='45' r='7' fill='white'/%3E%3Ccircle cx='65' cy='45' r='7' fill='white'/%3E%3Crect x='30' y='60' width='40' height='12' rx='4' fill='%23667eea'/%3E%3C/svg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image/svg+xml%22%7D%5D%7D">
+    <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22Meneo%22%2C%22short_name%22%3A%22Meneo%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230a0a1a%22%2C%22theme_color%22%3A%22%230a0a1a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fi.ibb.co%2FLzhYYfQf%2Fphoto-2026-07-07-12-41-58-no-bg-preview-carve-photos.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
@@ -26,15 +28,23 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0a1a;
             color: white;
             min-height: 100vh;
             min-height: 100dvh;
+            width: 100%;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            position: relative;
         }
 
         .bg-gradient {
@@ -43,11 +53,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at 20% 50%, rgba(74, 144, 226, 0.12) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 50%, rgba(233, 78, 119, 0.12) 0%, transparent 50%),
-                        radial-gradient(ellipse at 50% 100%, rgba(102, 126, 234, 0.06) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 20% 50%, rgba(74, 144, 226, 0.10) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 50%, rgba(233, 78, 119, 0.10) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 100%, rgba(102, 126, 234, 0.05) 0%, transparent 50%);
             z-index: -1;
             pointer-events: none;
+            width: 100%;
+            height: 100%;
         }
 
         .bg-gradient::before {
@@ -74,6 +86,7 @@
             padding: 0 16px;
             position: relative;
             z-index: 1;
+            width: 100%;
         }
 
         /* ===== ШАПКА ===== */
@@ -90,12 +103,14 @@
             z-index: 100;
             background: rgba(10, 10, 26, 0.75);
             min-height: 60px;
+            width: 100%;
         }
 
         .header-left {
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-shrink: 0;
         }
 
         .logo {
@@ -106,98 +121,18 @@
             flex-shrink: 0;
         }
 
-        .robot-logo {
-            width: 38px;
-            height: 48px;
-            position: relative;
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .robot-logo:active {
+        .logo-img:active {
             transform: scale(0.92);
         }
-
-        .robot-logo .head {
-            width: 30px;
-            height: 24px;
-            border-radius: 8px 8px 3px 3px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .robot-logo .head .eye {
-            width: 5px;
-            height: 5px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 7px;
-            box-shadow: 0 0 8px rgba(255,255,255,0.2);
-        }
-
-        .robot-logo .head .eye.l { left: 6px; }
-        .robot-logo .head .eye.r { right: 6px; }
-
-        .robot-logo .head .antenna {
-            width: 2px;
-            height: 10px;
-            background: rgba(255,255,255,0.15);
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .robot-logo .head .antenna::after {
-            content: '';
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            position: absolute;
-            top: -3px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: pulseLight 2.5s ease-in-out infinite;
-        }
-
-        @keyframes pulseLight {
-            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
-            50% { opacity: 0.3; transform: translateX(-50%) scale(1.5); }
-        }
-
-        .robot-logo .body {
-            width: 22px;
-            height: 16px;
-            border-radius: 3px 3px 6px 6px;
-            margin: 3px auto 0;
-        }
-
-        .robot-blue .head {
-            background: linear-gradient(145deg, #4A90E2, #2E6BB5);
-            box-shadow: 0 3px 16px rgba(74, 144, 226, 0.25);
-        }
-        .robot-blue .body {
-            background: linear-gradient(145deg, #4A90E2, #2E6BB5);
-        }
-        .robot-blue .head .antenna::after {
-            background: #4A90E2;
-            box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
-        }
-
-        .robot-pink .head {
-            background: linear-gradient(145deg, #E94E77, #C93D61);
-            box-shadow: 0 3px 16px rgba(233, 78, 119, 0.25);
-        }
-        .robot-pink .body {
-            background: linear-gradient(145deg, #E94E77, #C93D61);
-        }
-        .robot-pink .head .antenna::after {
-            background: #E94E77;
-            box-shadow: 0 0 12px rgba(233, 78, 119, 0.5);
-        }
-
-        .robot-blue { transform: translateX(4px); z-index: 2; }
-        .robot-pink { transform: translateX(-4px); z-index: 1; }
 
         .brand-name {
             font-size: 22px;
@@ -217,12 +152,15 @@
             flex-shrink: 0;
         }
 
-        .btn-login {
+        .btn-telegram {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             padding: 8px 18px;
-            background: transparent;
-            border: 1.5px solid rgba(255,255,255,0.12);
+            background: linear-gradient(135deg, #0088cc, #006699);
+            border: none;
             border-radius: 30px;
-            color: rgba(255,255,255,0.8);
+            color: white;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -230,15 +168,22 @@
             font-family: 'Inter', sans-serif;
             white-space: nowrap;
             touch-action: manipulation;
+            text-decoration: none;
         }
 
-        .btn-login:active {
+        .btn-telegram:active {
             transform: scale(0.95);
         }
 
-        .btn-login:hover {
-            border-color: rgba(255,255,255,0.25);
-            background: rgba(255,255,255,0.04);
+        .btn-telegram:hover {
+            box-shadow: 0 4px 20px rgba(0, 136, 204, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-telegram svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
         }
 
         /* ===== ГЛАВНЫЙ БЛОК ===== */
@@ -249,6 +194,11 @@
             gap: 32px;
             align-items: center;
             min-height: 50vh;
+            width: 100%;
+        }
+
+        .hero-left {
+            min-width: 0;
         }
 
         .hero-left h1 {
@@ -260,6 +210,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            word-break: break-word;
         }
 
         .hero-left .badge {
@@ -289,6 +240,10 @@
         }
 
         .btn-get-started {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             padding: 14px 36px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
@@ -301,8 +256,10 @@
             font-family: 'Inter', sans-serif;
             box-shadow: 0 6px 30px rgba(102, 126, 234, 0.3);
             touch-action: manipulation;
+            text-decoration: none;
             width: 100%;
-            max-width: 280px;
+            max-width: 320px;
+            text-align: center;
         }
 
         .btn-get-started:active {
@@ -312,6 +269,12 @@
         .btn-get-started:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 40px rgba(102, 126, 234, 0.45);
+        }
+
+        .btn-get-started svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
         }
 
         .hero-right {
@@ -440,6 +403,7 @@
             text-align: center;
             padding: 40px 0 56px;
             border-top: 1px solid rgba(255,255,255,0.04);
+            width: 100%;
         }
 
         .development .big-text {
@@ -490,6 +454,7 @@
         .features {
             padding: 48px 0 64px;
             border-top: 1px solid rgba(255,255,255,0.04);
+            width: 100%;
         }
 
         .features h2 {
@@ -510,6 +475,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 16px;
+            width: 100%;
         }
 
         .feature-card {
@@ -573,6 +539,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
+            width: 100%;
         }
 
         .footer p {
@@ -595,162 +562,6 @@
 
         .footer-links a:active {
             color: rgba(255,255,255,0.5);
-        }
-
-        /* ===== МОДАЛЬНОЕ ОКНО ВХОДА ===== */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal {
-            background: linear-gradient(145deg, #1a1a3e, #0f0f2a);
-            border-radius: 28px;
-            padding: 32px 24px;
-            max-width: 420px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 1px solid rgba(255,255,255,0.06);
-            animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .modal .close-btn {
-            float: right;
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.3);
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s;
-            line-height: 1;
-            padding: 4px 8px;
-            touch-action: manipulation;
-        }
-
-        .modal .close-btn:active {
-            color: white;
-        }
-
-        .modal h2 {
-            font-size: 26px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .modal .sub {
-            color: rgba(255,255,255,0.4);
-            font-size: 14px;
-            margin-bottom: 24px;
-        }
-
-        .modal .form-group {
-            margin-bottom: 16px;
-        }
-
-        .modal .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 4px;
-        }
-
-        .modal .form-group input {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(255,255,255,0.04);
-            border: 2px solid rgba(255,255,255,0.06);
-            border-radius: 14px;
-            color: white;
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        .modal .form-group input:focus {
-            border-color: #667eea;
-            background: rgba(255,255,255,0.06);
-        }
-
-        .modal .form-group input::placeholder {
-            color: rgba(255,255,255,0.2);
-        }
-
-        .modal .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 14px;
-            color: white;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-            margin-top: 4px;
-            touch-action: manipulation;
-        }
-
-        .modal .submit-btn:active {
-            transform: scale(0.97);
-        }
-
-        .modal .submit-btn:hover {
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .modal .register-link {
-            text-align: center;
-            margin-top: 18px;
-            color: rgba(255,255,255,0.35);
-            font-size: 14px;
-        }
-
-        .modal .register-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .modal .register-link a:active {
-            opacity: 0.7;
         }
 
         /* ===== TOAST УВЕДОМЛЕНИЯ ===== */
@@ -807,6 +618,7 @@
 
             .btn-get-started {
                 max-width: 100%;
+                margin: 0 auto;
             }
 
             .hero-robots {
@@ -833,32 +645,23 @@
                 min-height: 52px;
             }
 
-            .robot-logo {
-                width: 32px;
-                height: 40px;
-            }
-
-            .robot-logo .head {
-                width: 26px;
-                height: 20px;
-            }
-
-            .robot-logo .body {
-                width: 18px;
-                height: 14px;
+            .logo-img {
+                width: 38px;
+                height: 38px;
             }
 
             .brand-name {
                 font-size: 18px;
             }
 
-            .btn-login {
+            .btn-telegram {
                 padding: 6px 14px;
                 font-size: 13px;
             }
 
-            .modal {
-                padding: 24px 18px;
+            .btn-telegram svg {
+                width: 16px;
+                height: 16px;
             }
 
             .development .big-text {
@@ -900,45 +703,46 @@
                 padding: 12px 24px;
             }
 
-            .modal {
-                padding: 20px 16px;
-                border-radius: 20px;
+            .logo-img {
+                width: 32px;
+                height: 32px;
+                border-radius: 8px;
             }
 
-            .modal .form-group input {
-                padding: 12px 14px;
-                font-size: 14px;
-            }
-
-            .modal .submit-btn {
-                padding: 13px;
+            .brand-name {
                 font-size: 16px;
+            }
+
+            .btn-telegram {
+                padding: 5px 12px;
+                font-size: 12px;
+            }
+
+            .btn-telegram svg {
+                width: 14px;
+                height: 14px;
             }
         }
 
         @media (max-width: 360px) {
             .brand-name {
-                font-size: 16px;
+                font-size: 14px;
             }
 
-            .robot-logo {
+            .logo-img {
                 width: 28px;
-                height: 36px;
+                height: 28px;
+                border-radius: 6px;
             }
 
-            .robot-logo .head {
-                width: 22px;
-                height: 18px;
+            .btn-telegram {
+                padding: 4px 10px;
+                font-size: 11px;
             }
 
-            .robot-logo .body {
-                width: 16px;
+            .btn-telegram svg {
+                width: 12px;
                 height: 12px;
-            }
-
-            .btn-login {
-                font-size: 12px;
-                padding: 5px 12px;
             }
 
             .hero-left h1 {
@@ -960,6 +764,13 @@
                 padding-right: max(16px, env(safe-area-inset-right));
             }
         }
+
+        /* Фикс для iOS */
+        input, textarea, button, select {
+            -webkit-appearance: none;
+            appearance: none;
+            border-radius: 0;
+        }
     </style>
 </head>
 <body>
@@ -970,27 +781,17 @@
         <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <div class="header-left">
                 <div class="logo">
-                    <div class="robot-logo robot-blue">
-                        <div class="head">
-                            <div class="eye l"></div>
-                            <div class="eye r"></div>
-                            <div class="antenna"></div>
-                        </div>
-                        <div class="body"></div>
-                    </div>
-                    <div class="robot-logo robot-pink">
-                        <div class="head">
-                            <div class="eye l"></div>
-                            <div class="eye r"></div>
-                            <div class="antenna"></div>
-                        </div>
-                        <div class="body"></div>
-                    </div>
+                    <img class="logo-img" src="https://i.ibb.co/LzhYYfQf/photo-2026-07-07-12-41-58-no-bg-preview-carve-photos.png" alt="Meneo Logo">
                 </div>
                 <span class="brand-name">Meneo</span>
             </div>
             <div class="header-right">
-                <button class="btn-login" onclick="showLogin()">Войти</button>
+                <a href="https://t.me/+tLg0TnSeORtjMTUx" target="_blank" class="btn-telegram">
+                    <svg viewBox="0 0 24 24" fill="white">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.1-.2-.11-.06-.26-.04-.37-.02-.16.03-2.65 1.68-2.99 1.89-.28.17-.53.25-.81.25-.27 0-.53-.08-.78-.16-.92-.31-1.65-.5-1.58-1.06.03-.29.44-.59 1.2-.89 2.35-1.02 3.93-1.69 4.74-2.01 2.25-.9 2.72-1.06 3.02-.89.21.12.3.29.31.48.01.19-.03.39-.06.58z"/>
+                    </svg>
+                    Telegram
+                </a>
             </div>
         </div>
     </header>
@@ -1006,7 +807,12 @@
                     где технологии встречаются с эмоциями. Касайся телефонами, 
                     чтобы найти свою вторую половинку!
                 </p>
-                <button class="btn-get-started" onclick="showLogin()">Начать знакомства</button>
+                <a href="https://t.me/+tLg0TnSeORtjMTUx" target="_blank" class="btn-get-started">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    Начать знакомства
+                </a>
             </div>
             <div class="hero-right">
                 <div class="hero-robots">
@@ -1090,34 +896,11 @@
         <footer class="footer">
             <p>© 2026 Meneo. Все права защищены.</p>
             <div class="footer-links">
+                <a href="https://t.me/+tLg0TnSeORtjMTUx" target="_blank">Telegram</a>
                 <a href="#">О нас</a>
                 <a href="#">Контакты</a>
-                <a href="#">Политика</a>
             </div>
         </footer>
-    </div>
-
-    <!-- Модальное окно входа -->
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal('loginModal')">✕</button>
-            <h2>Добро пожаловать</h2>
-            <p class="sub">Войди в Meneo и начни знакомиться</p>
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="loginEmail" placeholder="alex@example.com" required autocomplete="email">
-                </div>
-                <div class="form-group">
-                    <label>Пароль</label>
-                    <input type="password" id="loginPassword" placeholder="Введи пароль" required autocomplete="current-password">
-                </div>
-                <button type="submit" class="submit-btn">Войти</button>
-                <div class="register-link">
-                    Нет аккаунта? <a href="#" onclick="event.preventDefault(); showToast('📱 Скоро регистрация будет доступна в приложении!', 'info')">Зарегистрироваться</a>
-                </div>
-            </form>
-        </div>
     </div>
 
     <script>
@@ -1139,116 +922,31 @@
                 card.style.transition = `all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${i * 0.08}s`;
                 observer.observe(card);
             });
+
+            // Фикс для iOS Safari
+            if (window.navigator && window.navigator.userAgent.indexOf('iPhone') !== -1) {
+                document.querySelectorAll('input, textarea').forEach(el => {
+                    el.style.fontSize = '16px';
+                });
+            }
         });
-
-        // === ОТОБРАЖЕНИЕ МОДАЛКИ ===
-        function showLogin() {
-            document.getElementById('loginModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Закрытие по клику на фон
-        document.querySelectorAll('.modal-overlay').forEach(el => {
-            el.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        });
-
-        // === ОБРАБОТКА ВХОДА ===
-        function handleLogin(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-
-            if (!email || !password) {
-                showToast('Введите email и пароль', 'error');
-                return;
-            }
-
-            // Проверка в localStorage
-            const users = JSON.parse(localStorage.getItem('meneo_users') || '[]');
-            const user = users.find(u => u.email === email);
-
-            if (!user) {
-                showToast('Пользователь не найден. Зарегистрируйтесь в приложении!', 'error');
-                return;
-            }
-
-            if (user.password !== password) {
-                showToast('Неверный пароль!', 'error');
-                return;
-            }
-
-            // Сохраняем текущего пользователя
-            localStorage.setItem('meneo_current_user', JSON.stringify(user));
-            
-            showToast('✅ Вход выполнен! Добро пожаловать в Meneo!', 'success');
-            closeModal('loginModal');
-            document.getElementById('loginForm').reset();
-            
-            // Обновляем интерфейс
-            updateUI(user);
-        }
-
-        // === ОБНОВЛЕНИЕ UI ===
-        function updateUI(user) {
-            const btn = document.querySelector('.btn-login');
-            btn.textContent = user.fullName.split(' ')[0];
-            btn.style.borderColor = 'rgba(74, 144, 226, 0.3)';
-            btn.style.background = 'rgba(74, 144, 226, 0.08)';
-            btn.onclick = function() {
-                if (confirm('Выйти из аккаунта?')) {
-                    localStorage.removeItem('meneo_current_user');
-                    location.reload();
-                }
-            };
-        }
-
-        // === TOAST УВЕДОМЛЕНИЯ ===
-        function showToast(message, type = 'info') {
-            const existing = document.querySelector('.toast');
-            if (existing) existing.remove();
-
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(-50%) translateY(20px)';
-                toast.style.transition = 'all 0.4s ease';
-                setTimeout(() => toast.remove(), 400);
-            }, 3500);
-        }
-
-        // === ПРОВЕРКА АВТОРИЗАЦИИ ===
-        (function checkAuth() {
-            const user = JSON.parse(localStorage.getItem('meneo_current_user') || 'null');
-            if (user) {
-                updateUI(user);
-            }
-        })();
 
         // === PWA: ОБРАБОТКА УСТАНОВКИ ===
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
+            // Можно показать кнопку установки
         });
 
+        // === ПРОВЕРКА НА ТЕЛЕФОН ===
+        function isMobile() {
+            return /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
+        }
+
         console.log('📱 Meneo оптимизирован для мобильных устройств!');
-        console.log('💾 Данные сохраняются в localStorage');
-        console.log('🔄 Добавь сайт на рабочий стол для лучшего опыта');
+        console.log('📲 Добавь сайт на рабочий стол для лучшего опыта');
+        console.log('📢 Присоединяйся к Telegram: https://t.me/+tLg0TnSeORtjMTUx');
     </script>
 </body>
 </html>
